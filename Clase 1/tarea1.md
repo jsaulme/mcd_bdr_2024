@@ -13,7 +13,7 @@
 
 
 #### Descripcion
-      El CEO de una nueva fintech solicita esta evaluando la posibilidad de que lanzar una tarjeta de credito al mercado. Para determinar las caracteristicas con las que va a contar el producto como si tendrá anualidad, si ofrecerá algún programa de beneficios y que requisitos de elegibilidad de los clientes que la soliciten, quiere comprender el panorama actual de las tarjetas de credito actuales ofrecidas por los bancos.
+   El CEO de una nueva fintech solicita esta evaluando la posibilidad de que lanzar una tarjeta de credito al mercado. Para determinar las caracteristicas con las que va a contar el producto como si tendrá anualidad, si ofrecerá algún programa de beneficios y que requisitos de elegibilidad de los clientes que la soliciten, quiere comprender el panorama actual de las tarjetas de credito actuales ofrecidas por los bancos.
 
 #### Entidades, atributos y tipo de datos de la Base de Datos
 
@@ -40,3 +40,6 @@
    - Perdida_Demora_Equipaje: (*str*)
    - Accidentes_Enfermedades_Viajes: (*str*)
    - Renta_Automoviles: (*str*)
+
+#### Fuente:
+   La informacion fue obtenida desde el [sitio del Gobierno Mexicano](https://tarjetas.condusef.gob.mx/comparativo.php)
