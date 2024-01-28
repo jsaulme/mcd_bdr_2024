@@ -27,7 +27,6 @@
    - Anualidad: (*num*)
    - Anualidad tarjeta adicional. (*num*)
 
-
 3. **Comisiones:**
    - Gastos_Cobranza: (*num*)
    - Falta_Pago: (*num*)
