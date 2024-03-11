@@ -1,1 +1,40 @@
+# Tarea 3
 
+## 1 - Crea un esquema del modelo entidad relacional de tu base de datos a partir del modelo e-r de la tarea anterior
+## 2 - Representa con un diagrama relacional tu esquema del punto anterior
+## 3 - Encuentra 4 operaciones que vayas a usar en tu base de datos y expresalas mediante operadores de algebra relacional. Explica con tus propias palabras cada una de las operaciones
+## 4 - Reporta tu tarea de manera claramente identificable en el repositorio.
+
+### Esquema del modelo entidad relacional
+Institucion (id_institucion, nombre_inst)
+Banco (id_banco, nombre_banco)
+Clientes (id_clientes, nombre_cliente, correo_cliente, telefono_cliente, rfc_cliente)
+Tarjeta de credito (id_tarjeta, nombre_tarjeta, nivel_tarjeta)
+SOlicitud (id_solicitud, folio_solicitud, fecha_solicitud, medio_solicitud)
+Requisitos (id_requisito, ingreso_mensual, historial_crediticio, monto_garantia, edad_minima, edad_maxima)
+Comisiones_tarjeta (id_comision, anualidad, pago_tardio, intereses, cobranza)
+Beneficios_Tarjeta (id_beneficio, puntos, cashback, reduccion_tasa_interes)
+Red_pago (id_red_pago, visa, mastercard, americanexpress)
+Beneficio_visa (id_beneficio_visa, garantia_Extendida_visa, reembolso_anual, concierge)
+Beneficio_mastercard (id_beneficio_mastercard, garantia_extendida_mc, acceso_Salas_vip, cine_2x1)
+Beneficio_amex (id_beneficio_amex, garantia_Extendida_amex, bono_bienvenida_amex, concierge_amex)
+
+### Operaciones de algebra relacional
+
+π nombre_cliente, rfc_cliente (σ ingreso_mensual > 20000 (Requisitos) x Clientes x σ visa = 'sí' (Red_pago))
+
+Esta operación selecciona los clientes con un ingreso mensual mayor a 20000 pesos que tienen una tarjeta Visa, y luego proyecta los nombres y RFC de esos clientes. 
+
+
+π nombre_banco (σ ingreso_mensual > 50000 (Requisitos) x Banco x σ americanexpress = 'sí' (Red_pago))
+
+Esta operación selecciona los bancos que requieren un ingreso mensual mayor a 50000 pesos para ofrecer una tarjeta American Express, y luego proyecta los nombres de esos bancos.
+
+
+π nombre_cliente, rfc_cliente (σ ingreso_mensual > 100000 ∧ count(id_beneficio) >= 3 (Requisitos x Clientes x Beneficios_Tarjeta x σ visa = 'sí' ∨ americanexpress = 'sí' (Red_pago)))
+
+Esta operación selecciona los clientes con un ingreso mensual mayor a 100000 pesos, que tienen una tarjeta Visa o American Express, y que han hecho uso de al menos 3 beneficios de sus tarjetas de crédito. Luego, proyecta los nombres y RFC de esos clientes.
+
+π correo_cliente (σ medio_solicitud = 'electronico' ∧ mastercard = 'sí' ∧ anualidad > 0 ∧ cashback > 0 (Solicitud x Red_pago x Comisiones_tarjeta x Beneficios_Tarjeta x Clientes))
+
+Esta operación selecciona los clientes que realizaron la solicitud por medio electrónico de una tarjeta Mastercard, que tienen una comisión por anualidad y beneficio de cashback. Luego, proyecta los correos de esos clientes.
