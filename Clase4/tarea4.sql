@@ -1,3 +1,12 @@
+-- Eliminar la base de datos "tarjetas_de_credito" si existe
+DROP DATABASE IF EXISTS tarjetas_de_credito;
+
+-- Crear la base de datos "tarjetas_de_credito"
+CREATE DATABASE tarjetas_de_credito;
+
+-- Usar la base de datos "tarjetas_de_credito"
+USE tarjetas_de_credito;
+
 CREATE TABLE Institucion (
   id_institucion INT PRIMARY KEY,
   nombre_inst VARCHAR(255)
