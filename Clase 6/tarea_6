@@ -1,1 +1,40 @@
+#Tarea 6
+
+Usa funciones de agregacion para calcular en tu base de datos:
+
+#Este query calculará el promedio de la columna ingreso_mensual de la tabla Requisitos, que representa los ingresos mensuales mínimos requeridos.
+SELECT AVG(ingreso_mensual) AS "Promedio de Ingresos Mínimos"
+FROM Requisitos;
+
+
+#Este query mostrará el valor mínimo de la columna anualidad que un cliente tendría que pagar por una tarjeta de crédito.
+SELECT MIN(anualidad) AS "Anualidad Mínima"
+FROM Comisiones_tarjeta;
+
+
+#Este query devuelve el monto maximo que un cliente requiere para dejar en garantia por una tarjeta de credito
+SELECT MAX(monto_garantia) AS "Monto Máximo de Garantía"
+FROM Requisitos;
+
+
+#Este query calcula el primer cuartil (Q1) de la columna "intereses" en la tabla "Comisiones_tarjeta"
+SELECT PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY intereses) AS Q1
+FROM Comisiones_tarjeta;
+
+#Este query devuelve la moda del nivel de tarjeta 
+SELECT nivel_tarjeta AS "Nivel de Tarjeta Mas Frecuente", COUNT(*) AS "Frecuencia"
+FROM tarjeta_de_credito
+GROUP BY nivel_tarjeta
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
+Algunos de los hallazgos que encontre busquedas en linea es que algunas funciones no estan disponibles
+en las versiones anteriores a MySQL, como por ejemplo la funcion de PECENTILE.CONT().
+y la forma en que lo solucionan es un empleando fuciones mas pequeñas y que van determinando los
+parametros de forma individual. 
+
+
+
+
+
 
