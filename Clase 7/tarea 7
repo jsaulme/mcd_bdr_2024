@@ -1,0 +1,60 @@
+# Tarea 7
+
+## Revisa inconsistencias en tu base de datos
+
+### Uno de los casos mas comunes en las tarjetas de credito es que el nombre de la misma refleja el nivel de la tarjeta de credito,
+### por lo que si una tarjeta lleva en el nombre la palabra "Oro", es muy probable que su nivel sea oro. Vamos a buscar aquellas tarjetas que
+### no cumplan con esta situacion.
+
+SELECT *
+FROM tarjeta_de_credito
+WHERE nombre_tarjeta LIKE '%oro%' AND nivel_tarjeta NOT LIKE '%oro%';
+
+### Con este query etoy buscando aquellas tarjetas que en la columna "tarjeta_de_credito" contenga la palabra "oro" pero en la columna "nivel_tarjeta"
+### contengan un valor distinto a la palabra "oro" y me regresa esta lista:
+
+id_tarjeta|nombre_tarjeta        |nivel_tarjeta|
+----------+----------------------+-------------+
+        10|Oro                   |Platino      |
+        15|Tarjeta de Crédito Oro|Platino      |
+        21|Visa Oro Internacional|WorldElite   |
+        46|Oro                   |Basica       |
+        60|Oro                   |Platino      |
+        69|Oro                   |Platino      |
+        75|Oro                   |Signature    |
+        94|Fiesta Rewards Oro    |Basica       |
+       107|Tasa Baja Oro         |Signature    |
+       118|Oro                   |WorldElite   |
+       122|Telcel Oro            |Platino      |
+
+### Aqui se almacenan los registros en la tabla temporal "tarjetas_a_actualizar".
+
+CREATE TEMPORARY TABLE tarjetas_a_actualizar AS
+SELECT *
+FROM tarjeta_de_credito
+WHERE nombre_tarjeta LIKE '%oro%' AND nivel_tarjeta NOT LIKE '%oro%';
+
+-- Verificar los registros almacenados en la tabla temporal
+SELECT *
+FROM tarjetas_a_actualizar;
+
+### Actualizar los datos de la tabla temporal
+
+UPDATE tarjetas_a_actualizar
+SET "nivel_tarjeta" = "Oro";
+
+-- Verificar que los registros almacenados en la tabla temporal han sido modificados
+SELECT *
+FROM tarjetas_a_actualizar;
+
+-- Eliminar la tabla temporal
+DROP TEMPORARY TABLE tarjetas_a_actualizar;
+
+### Ejecutar subconsultas
+
+-- Devuelve el promedio de la anualidad de las tarjetas de crédito para cada banco 
+SELECT b.nombre_banco, AVG(ct.anualidad) AS promedio_anualidad
+FROM Banco b
+JOIN Tarjeta_de_credito tc ON b.id_banco = tc.id_banco
+JOIN Comisiones_tarjeta ct ON tc.id_tarjeta = ct.id_comision
+GROUP BY b.nombre_banco;
